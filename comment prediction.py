@@ -4,16 +4,15 @@ from google.cloud import automl_v1beta1 as automl
 from google.oauth2 import service_account
 
 # Load the csv
-# For my case, I am predicting either 'Include' or 'Exclude' classes
-data =pd.read_csv('200comment.csv', encoding='utf-8')
+data =pd.read_csv('test comment.csv', encoding='utf-8')
 
 # assign project id and model id
 project_id = '397901391776'
 compute_region = 'us-central1'
-model_id = 'TCN5748550255222194176'
+model_id = 'TCN892922189009911808'
 
 # Create client for prediction service.
-credentials = service_account.Credentials.from_service_account_file("D:\download\gerald.json")
+credentials = service_account.Credentials.from_service_account_file("your service account key")
 automl_client = automl.AutoMlClient(credentials=credentials)
 prediction_client = automl.PredictionServiceClient(credentials=credentials)
 
@@ -40,13 +39,14 @@ for row in data.values:
     params = {}
     response = prediction_client.predict(model_full_id, payload, params)
 
-    temp = pd.DataFrame({'Negative': [response.payload[0].classification.score],
-                         'Positive': [response.payload[1].classification.score],
-                         'Neutral': [response.payload[2].classification.score]})
+    temp = pd.DataFrame({'Negative': [response.payload[0].classification.score], #First result
+                         'Positive': [response.payload[1].classification.score], #Second result
+                         'Neutral': [response.payload[2].classification.score]}) # third result
 
     df = pd.concat([df, temp],ignore_index=True)
 
 # Add the predicted scores to the original Dataframe
 df_automl = pd.concat([data, df], axis =1)
-# Export the new Dataframe
+
+# Export the new Dataframe,generate a csv
 df_automl.to_csv("df_automl.csv", index = False,encoding="utf-8")
