@@ -16,6 +16,6 @@ for comment in comments:
     data.append(text)
     print(text)
     with open('comment.csv', 'a', encoding="utf-8 ") as datafile:
-        writer = csv.writer(datafile, delimiter='.')
-        writer.writerows(data)
+        writer = csv.writer(datafile)
+        writer.writerow(data)
     print('get comment complete')

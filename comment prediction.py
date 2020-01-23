@@ -4,7 +4,7 @@ from google.cloud import automl_v1beta1 as automl
 from google.oauth2 import service_account
 
 # Load the csv
-data =pd.read_csv('your_csv_path', encoding='utf-8')# type in your csv path
+data =pd.read_csv('test comment.csv', encoding='utf-8')# type in your csv path
 
 # assign project id and model id
 project_id = '397901391776'
@@ -12,7 +12,7 @@ compute_region = 'us-central1'
 model_id = 'TCN892922189009911808'
 
 # Create client for prediction service.
-credentials = service_account.Credentials.from_service_account_file("your service account key")#type in your serivce accoint key path
+credentials = service_account.Credentials.from_service_account_file("D:\download\gerald.json")#type in your serivce accoint key path
 automl_client = automl.AutoMlClient(credentials=credentials)
 prediction_client = automl.PredictionServiceClient(credentials=credentials)
 
