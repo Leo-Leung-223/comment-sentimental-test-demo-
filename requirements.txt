@@ -17,7 +17,7 @@ google-cloud-automl==0.9.0
 google-cloud-vision==0.41.0
 googleapis-common-protos==1.6.0
 grpcio==1.25.0
-httplib2==0.14.0
+httplib2==0.18.0
 idna==2.8
 jmespath==0.9.4
 numpy==1.18.1
